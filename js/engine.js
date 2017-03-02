@@ -126,8 +126,7 @@ var Engine = (function(global) {
     }
 
     function renderScore() {
-        //[bug]clear score, but it's not work?
-        ctx.clearRect(200, 40, 100, 10);
+        ctx.clearRect(200, 20, 100, 30);
         ctx.fillStyle = "red";
         ctx.fillText(player.score, 220, 40);
     }
