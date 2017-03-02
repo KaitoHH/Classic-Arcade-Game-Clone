@@ -65,7 +65,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
     /* 这个函数会遍历在 app.js 定义的存放所有敌人实例的数组，并且调用他们的 update()
@@ -87,12 +87,12 @@ var Engine = (function(global) {
     function render() {
         /* 这个数组保存着游戏关卡的特有的行对应的图片相对路径。 */
         var rowImages = [
-                'images/water-block.png',   // 这一行是河。
-                'images/stone-block.png',   // 第一行石头
-                'images/stone-block.png',   // 第二行石头
-                'images/stone-block.png',   // 第三行石头
-                'images/grass-block.png',   // 第一行草地
-                'images/grass-block.png'    // 第二行草地
+                'images/water-block.png', // 这一行是河。
+                'images/stone-block.png', // 第一行石头
+                'images/stone-block.png', // 第二行石头
+                'images/stone-block.png', // 第三行石头
+                'images/grass-block.png', // 第一行草地
+                'images/grass-block.png' // 第二行草地
             ],
             numRows = 6,
             numCols = 5,
@@ -110,6 +110,7 @@ var Engine = (function(global) {
         }
 
         renderEntities();
+        renderScore();
     }
 
     /* 这个函数会在每个时间间隙被 render 函数调用。他的目的是分别调用你在 enemy 和 player
@@ -124,12 +125,34 @@ var Engine = (function(global) {
         player.render();
     }
 
+    function renderScore() {
+        //[bug]clear score, but it's not work?
+        ctx.clearRect(200, 40, 100, 10);
+        ctx.fillStyle = "red";
+        ctx.fillText(player.score, 220, 40);
+    }
+
+    function checkCollisions() {
+        var collision = false;
+        allEnemies.forEach(function(enemy) {
+            if (player.row == enemy.row && Math.abs(player.col - enemy.col) < 0.78) {
+                collision = true;
+            }
+        });
+        if (collision) {
+            player.score--;
+            player.resetPosition();
+        }
+    }
+
     /* 这个函数现在没干任何事，但是这会是一个好地方让你来处理游戏重置的逻辑。可能是一个
      * 从新开始游戏的按钮，也可以是一个游戏结束的画面，或者其它类似的设计。它只会被 init()
      * 函数调用一次。
      */
     function reset() {
-        // 空操作
+        ctx.font = "30px Courier New";
+        ctx.fillStyle = "blue";
+        ctx.fillText("Your Score: ", 0, 40);
     }
 
     /* 紧接着我们来加载我们知道的需要来绘制我们游戏关卡的图片。然后把 init 方法设置为回调函数。
