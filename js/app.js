@@ -1,5 +1,6 @@
-var numRows = 6,
-    numCols = 5;
+"use strict";
+var NUM_ROWS = 6,
+    NUM_COLS = 5;
 var Entity = function(col, row, resource) {
     this.x = 0;
     this.y = 0;
@@ -31,7 +32,7 @@ Enemy.prototype.update = function(dt) {
     // 你应该给每一次的移动都乘以 dt 参数，以此来保证游戏在所有的电脑上
     // 都是以同样的速度运行的
     this.col += this.velocity * dt;
-    if (this.col > numCols)
+    if (this.col > NUM_COLS)
         this.col = -1;
     this.updateXY();
 };
@@ -69,31 +70,39 @@ Player.prototype.handleInput = function(key) {
             if (this.row == 0) {
                 this.score++;
                 // reset the position
-                this.row = numRows - 1;
+                this.row = NUM_ROWS - 1;
             }
             break;
         case 'right':
-            if (this.col < numCols - 1)
+            if (this.col < NUM_COLS - 1)
                 this.col++;
             break;
         case 'down':
-            if (this.row < numRows - 1)
+            if (this.row < NUM_ROWS - 1)
                 this.row++;
             break;
     }
 }
 
+var loadEnemies = function(enemyArray) {
+    var enemiesInfo = [
+        [-1, 1, 2],
+        [-1, 2, 2.3],
+        [-1, 3, 3.9],
+        [2, 2, 2.6],
+        [3, 3, 1.3],
+        [1, 1, 4.1]
+    ];
+    enemiesInfo.forEach(function(parm) {
+        enemyArray.push(new Enemy(parm[0], parm[1], parm[2]));
+    });
+};
+
 // 现在实例化你的所有对象
 // 把所有敌人的对象都放进一个叫 allEnemies 的数组里面
 // 把玩家对象放进一个叫 player 的变量里面
-allEnemies = [
-    new Enemy(-1, 1, 2),
-    new Enemy(-1, 2, 2.3),
-    new Enemy(-1, 3, 3.9),
-    new Enemy(2, 2, 2.6),
-    new Enemy(3, 3, 1.3),
-    new Enemy(1, 1, 4.1)
-];
+var allEnemies = [];
+loadEnemies(allEnemies);
 var player = new Player();
 
 // 这段代码监听游戏玩家的键盘点击事件并且代表将按键的关键数字送到 Play.handleInput()
