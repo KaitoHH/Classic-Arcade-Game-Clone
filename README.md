@@ -1,6 +1,11 @@
-前端纳米学位街机游戏项目
-===============================
+Classic Arcade Game Clone
+===
+##Introduction
+Classic Arcade Game Clone is a simple JavaScript game. In this game you have a Player and Enemies. The goal of the player is to reach the water, without colliding into any one of the enemies. The player can move left, right, up and down. The enemies move in varying speeds on the paved block portion of the scene. Once a the player collides with an enemy, the game is reset and the player moves back to the start square. Once the player reaches the water the game is won.
+##Development Environment
+`JavaScript` with strict mode
+##How to play
+Download and open index.html using any modern browser.
+##Screenshot
+![screenshot](https://github.com/KaitoHH/Classic-Arcade-Game-Clone/raw/master/shot.png)
 
-学生应该用这个[评审标准](https://review.udacity.com/#!/projects/2696458597/rubric)来自我检查自己提交的代码。 确认自己写的函数要是**面向对象的** -  要么是类函数（就像函数 Player 和 Enemy）要么是类的原型链上的函数比如 Enemy.prototype.checkCollisions ， 在类函数里面或者类的原型链函数里面适当的使用关键词 'this' 来引用调用该函数的对象实例。最后保证你的**readme.md**文件要写明关于如何运行和如何玩你的街机游戏的指引。
-
-关于如何开始这个项目的更详细的指导，可以查阅这一份[指南](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true)
